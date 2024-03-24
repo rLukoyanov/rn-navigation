@@ -10,7 +10,14 @@ export const MealsOverviewScreen = ({ route }) => {
   });
 
   function renderMealItem({ item }) {
-    return <MealItem title={item.title} />;
+    const props = {
+      title: item.title,
+      imageURL: item.imageUrl,
+      duration: item.duration,
+      complexity: item.complexity,
+      affordability: item.affordability,
+    };
+    return <MealItem {...props} />;
   }
 
   return (
