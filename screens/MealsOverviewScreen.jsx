@@ -17,6 +17,7 @@ export const MealsOverviewScreen = ({ route, navigation }) => {
 
   function renderMealItem({ item }) {
     const props = {
+      id: item.id,
       title: item.title,
       imageURL: item.imageUrl,
       duration: item.duration,
