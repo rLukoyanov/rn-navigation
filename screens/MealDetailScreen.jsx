@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { List } from "../components/MealDetail/List";
+import { IconBtn } from "../components/IconBtn";
 
 export const MealDetailScreen = ({ route, navigation }) => {
   const mealId = route.params.mealId;
@@ -19,7 +20,7 @@ export const MealDetailScreen = ({ route, navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <Button title="tap" onPress={headerBtnHandler} />;
+        return <IconBtn onPress={headerBtnHandler} />;
       },
     });
   }, [navigation, headerBtnHandler]);
