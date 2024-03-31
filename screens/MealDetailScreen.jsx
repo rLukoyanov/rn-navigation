@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import {
   Button,
   Image,
@@ -10,20 +10,35 @@ import {
 import { MEALS } from "../data/dummy-data";
 import { List } from "../components/MealDetail/List";
 import { IconBtn } from "../components/IconBtn";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 export const MealDetailScreen = ({ route, navigation }) => {
+  const favoriteMealsCtx = useContext(FavoritesContext);
   const mealId = route.params.mealId;
   const selectedMeal = MEALS.find((meal) => mealId === meal.id);
 
-  function headerBtnHandler() {}
+  function changeFAvoritesMealHandler() {
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealId);
+    } else {
+      favoriteMealsCtx.addFavorite(mealId);
+    }
+  }
+
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <IconBtn onPress={headerBtnHandler} />;
+        return (
+          <IconBtn
+            icon={mealIsFavorite ? "star" : "star-outline"}
+            onPress={changeFAvoritesMealHandler}
+          />
+        );
       },
     });
-  }, [navigation, headerBtnHandler]);
+  }, [navigation, changeFAvoritesMealHandler]);
 
   return (
     <ScrollView style={{ marginBottom: 32 }}>
